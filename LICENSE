@@ -1,0 +1,53 @@
+Hydrarium License
+
+Copyright (c) 2026 mattjesmc. All rights reserved.
+
+The source of this project is published so that it can be read, learned from and
+contributed to. It is not published for redistribution. The terms below say
+exactly what that means.
+
+1. Use
+
+   You may download, install, run and play with this software, on your own
+   machine or on a server you operate, for any purpose including a commercial
+   one. No permission is needed and no fee is charged.
+
+2. Modification
+
+   You may modify this software for your own use, and you may publish patches,
+   diffs or excerpts of the source for the purpose of reporting a bug or
+   proposing a change to this project.
+
+3. Redistribution requires written permission
+
+   You may NOT distribute this software, in whole or in part, in original or
+   modified form, without prior written permission from the copyright holder.
+   This includes, without limitation:
+
+     - re-uploading the mod, its jar, or its datapack or resource pack zips to
+       any site, mirror, or file host;
+     - including it in a modpack, server pack, launcher, or any other bundle,
+       whether or not that bundle is paid for;
+     - distributing a fork, port, or other derivative work.
+
+   Linking to an official download page always requires no permission.
+
+4. Asking for permission
+
+   Open a request at https://github.com/mattjesmc/hydrarium/issues. Permission,
+   where granted, is granted in writing and covers only the distribution it
+   describes.
+
+5. Reserved rights
+
+   All rights not expressly granted above are reserved by the copyright holder.
+
+6. No warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.

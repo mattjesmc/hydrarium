@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "package": "com.mattjesmc.hydrarium.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "BlockItemMixin",
+    "BlockStateBaseMixin",
+    "BottleItemMixin",
+    "BucketItemMixin",
+    "CauldronDispatcherInvoker",
+    "CraftingRecipeMixin",
+    "DispensibleContainerItemMixin",
+    "FlowingFluidMixin",
+    "LiquidBlockMixin",
+    "LivingEntityMixin",
+    "PowderSnowBlockMixin",
+    "ServerLevelMixin",
+    "SimpleWaterloggedBlockMixin"
+  ],
+  "client": [
+    "client.BreakingItemParticleMixin",
+    "client.WaterFogEnvironmentMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

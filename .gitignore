@@ -1,0 +1,15 @@
+.gradle/
+build/
+# A PATTERN with a leading slash, and the anchor is not decoration -- an unanchored `run*/` also
+# swallows any `run/` directory nested under src/main/resources, which is where a datapack's
+# structure folder could plausibly be called that. Rocketeer lost six templates to exactly this.
+# A run directory is only ever created at the repo root, which is where gradle puts it.
+/run*/
+.claude/worktrees/
+libs/
+*.log
+.idea/
+*.iml
+logs/
+.claude/settings.local.json
+__pycache__/

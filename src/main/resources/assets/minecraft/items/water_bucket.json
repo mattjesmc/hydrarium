@@ -1,0 +1,25 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "hydrarium:tint",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/water_bucket"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "hydrarium:item/water_bucket_tinted",
+      "tints": [
+        {
+          "type": "minecraft:constant",
+          "value": 16777215
+        },
+        {
+          "type": "hydrarium:water_tint",
+          "default": 4948735
+        }
+      ]
+    }
+  }
+}

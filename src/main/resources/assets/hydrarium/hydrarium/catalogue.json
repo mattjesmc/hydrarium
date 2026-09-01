@@ -1,0 +1,118 @@
+{
+  "waters": [
+    {
+      "id": "white",
+      "tint": 16383998,
+      "dye": "white",
+      "biome_strength": 0.35
+    },
+    {
+      "id": "orange",
+      "tint": 16351261,
+      "dye": "orange",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "magenta",
+      "tint": 13061821,
+      "dye": "magenta",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "light_blue",
+      "tint": 3847130,
+      "dye": "light_blue",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "yellow",
+      "tint": 16701501,
+      "dye": "yellow",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "lime",
+      "tint": 8439583,
+      "dye": "lime",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "pink",
+      "tint": 15961002,
+      "dye": "pink",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "gray",
+      "tint": 4673362,
+      "dye": "gray",
+      "biome_strength": 0.35
+    },
+    {
+      "id": "light_gray",
+      "tint": 10329495,
+      "dye": "light_gray",
+      "biome_strength": 0.35
+    },
+    {
+      "id": "cyan",
+      "tint": 1481884,
+      "dye": "cyan",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "purple",
+      "tint": 8991416,
+      "dye": "purple",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "blue",
+      "tint": 3949738,
+      "dye": "blue",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "brown",
+      "tint": 8606770,
+      "dye": "brown",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "green",
+      "tint": 6192150,
+      "dye": "green",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "red",
+      "tint": 11546150,
+      "dye": "red",
+      "biome_strength": 0.25
+    },
+    {
+      "id": "black",
+      "tint": 1908001,
+      "dye": "black",
+      "biome_strength": 0.35
+    },
+    {
+      "id": "ash_slurry",
+      "tint": 4210752,
+      "effect": "ash",
+      "biome_strength": 0.35
+    },
+    {
+      "id": "irradiated",
+      "tint": 7921712,
+      "effect": "decay",
+      "biome_strength": 0.15
+    },
+    {
+      "id": "lumewater",
+      "tint": 4251856,
+      "effect": "glow",
+      "biome_strength": 0.1
+    }
+  ]
+}

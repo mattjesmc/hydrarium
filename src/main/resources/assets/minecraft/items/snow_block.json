@@ -1,0 +1,21 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "hydrarium:tint",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "minecraft:block/snow_block"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "hydrarium:item/snow_block_tinted",
+      "tints": [
+        {
+          "type": "hydrarium:frozen_tint",
+          "frost": 0.0
+        }
+      ]
+    }
+  }
+}

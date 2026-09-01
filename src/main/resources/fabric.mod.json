@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "hydrarium",
+  "version": "${version}",
+  "name": "Hydrarium",
+  "description": "A water library: tinted water IS minecraft:water, so a colour is a row in a table and no fluid is ever registered.",
+  "authors": ["mattjesmc"],
+  "license": "All Rights Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.mattjesmc.hydrarium.Hydrarium"],
+    "client": ["com.mattjesmc.hydrarium.client.HydrariumClient"]
+  },
+  "mixins": [
+    "hydrarium.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "rocketeer": "*",
+    "herbarium": "*",
+    "mcptoolkit": "*"
+  }
+}

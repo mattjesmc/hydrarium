@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+        mavenCentral()
+        // The workspace's convention plugin (mcmodding/gradle-conventions/), resolved like
+        // mcp-toolkit is: from mavenLocal, by coordinate. Scoped so a stale local copy of some
+        // OTHER plugin cannot shadow the real one.
+        mavenLocal {
+            content {
+                includeGroup 'com.mattmc.gradle'   // the convention plugin's jar
+                includeGroup 'com.mattmc.mcmod'    // its plugin marker (group == plugin id)
+            }
+        }
+    }
+}
+
+rootProject.name = 'hydrarium'

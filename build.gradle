@@ -1,0 +1,107 @@
+plugins {
+    // Loom's plugin id changed in 26.1+: net.fabricmc.fabric-loom (was fabric-loom)
+    id 'net.fabricmc.fabric-loom' version '1.17-SNAPSHOT'
+    // Shared workspace conventions: Minecraft/loader versions, Java level, repositories,
+    // fabric.mod.json version expansion, and the optional mcp-toolkit bridge. Must come AFTER Loom
+    // - it configures things Loom creates. See mcmodding/gradle-conventions/.
+    id 'com.mattmc.mcmod' version '0.2.0'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+loom {
+    // The tint sources, the fluid model and the client mirror are @Environment(CLIENT); the tint
+    // field, the join and the containers are not. Split source sets keep the two apart and make
+    // "the field half is server-safe" a claim the compiler checks -- nothing in src/client is on
+    // the test classpath by construction, which is why the join can be tested at all.
+    splitEnvironmentSourceSets()
+
+    mods {
+        "hydrarium" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+
+    runs {
+        server {
+            // Its own directory: a dev client holds run/logs/latest.log open, so sharing `run/`
+            // makes any concurrent server run die on "Device or resource busy".
+            runDir project.hasProperty('serverDir') ? project.serverDir : 'run-server'
+            // ./gradlew runServer -Psmoke   -- build a rig, check the four things only a world can
+            // answer, print a summary and shut down. See SmokeCheck for what those four are and
+            // why they cannot live in src/test.
+            if (project.hasProperty('smoke')) {
+                vmArg '-Dhydrarium.smoke=true'
+            }
+        }
+    }
+}
+
+dependencies {
+    // Minecraft, fabric-loader and (when installed) mcp-toolkit come from the com.mattmc.mcmod
+    // convention plugin. fabric-api is per-mod, and this one leans on it harder than herbarium
+    // does -- four seams, and three of them are the reason this mod needs almost no mixins:
+    //
+    //   AttachmentRegistry     (fabric-data-attachment-api-v1)  the tint field: chunk storage,
+    //                                                           disk persistence AND client sync,
+    //                                                           none of which we hand-roll
+    //   FluidRenderingRegistry (fabric-rendering-fluids-v1)     water's FluidModel, tint source
+    //                                                           included, replaced by registration
+    //                                                           rather than by mixing into a static
+    //   BlockColorRegistry     (fabric-rendering-v1)            the particle and cauldron surfaces
+    //   ClientChunkEvents      (fabric-lifecycle-events-v1)     when to build and drop the mirror
+    //
+    // The second one is worth stating plainly because DESIGN.md predicted a mixin there:
+    // FluidStateModelSet.bake is a static that hardcodes BlockTintSources.water(), and
+    // fabric-rendering-fluids-v1 already mixes into it so that a registration wins. See
+    // HydrariumClient.
+    implementation "net.fabricmc.fabric-api:fabric-api:${fabricApiVersion}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:${project.junit_version}"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+    }
+}
+
+// The built-in catalogue is generated, not committed by hand, and this is the one command that
+// regenerates it.
+//
+// herbarium's `art` task regenerates SPRITES; this one regenerates a TABLE, and the difference is
+// the whole mod. hydrarium ships no block texture at all -- tinted water is minecraft:water wearing
+// minecraft's own water_still, so there is nothing to draw. What the generator owns is the sixteen
+// dye rows and their lang entries, which are derived from one palette and must not be typed out
+// sixteen times by hand.
+//
+// It also owns the one sprite this mod has: a grey mask over vanilla's twenty-four water-bucket
+// pixels, because an ITEM has no position and so cannot be tinted the way the world is.
+//
+//   ./gradlew art                 regenerate the built-in catalogue and its lang file
+//   ./gradlew art --rerun         ...even if nothing changed
+tasks.register('art', Exec) {
+    group = 'hydrarium'
+    description = 'Regenerate the built-in water catalogue from authoring/gen_water.py.'
+    commandLine 'python', 'authoring/gen_water.py', '--out', 'src/main/resources'
+    inputs.file 'authoring/gen_water.py'
+    // EVERY directory the generator writes. An output this task does not declare is an output
+    // Gradle will call up-to-date while it is stale.
+    outputs.dir 'src/main/resources/assets/hydrarium/hydrarium'
+    outputs.dir 'src/main/resources/assets/hydrarium/lang'
+    outputs.dir 'src/main/resources/assets/hydrarium/textures'
+    outputs.dir 'src/main/resources/assets/hydrarium/models'
+    // assets/MINECRAFT. The bucket overlay needs vanilla's own item model replaced, so the
+    // generator writes outside hydrarium's namespace -- the only place it does, and the only place
+    // this mod can collide with a resource pack.
+    outputs.dir 'src/main/resources/assets/minecraft'
+}
