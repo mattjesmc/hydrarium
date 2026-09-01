@@ -35,21 +35,36 @@ GROUND_2 = (28, 33, 41)
 INK = (233, 240, 245)
 DIM = (140, 158, 172)
 
+# Every section modpage.yml actually lays out, and the window of the palette its banner takes.
+#
+# The offset is WRITTEN DOWN rather than derived from the position in this list, and that is the
+# whole point of the third column: with `offset=i * 3`, deleting one entry shifts every entry below
+# it and the next run repaints banners belonging to sections nobody touched. The numbers below are
+# the ones the index used to produce, so the art on disk is unchanged -- they are a starting point
+# for a new section, not a constraint on it. Any multiple works; the palette wraps.
+#
+# There is no `recipes` row. hydrarium registers zero items and so ships zero recipe JSON --
+# `src/main/resources/data/` does not exist -- and modpage's recipes section is opt-in for exactly
+# that reason. A row here that modpage.yml does not also declare is a banner for a section that
+# never renders, and nothing warns: `modpage build` reads its own section list, not this one.
+#
+# `configuration` is still such a row, deliberately left: the page says there is nothing to
+# configure, so the banner is spare art rather than a section waiting to be written. Drop it the
+# day that stays true.
 SECTIONS = [
-    ("about", "About"),
-    ("features", "Features"),
-    ("commands", "Commands"),
-    ("catalogue", "Adding your own waters"),
-    ("gallery", "Gallery"),
-    ("recipes", "Recipes"),
-    ("dependencies", "Dependencies"),
-    ("incompatibilities", "Incompatibilities"),
-    ("installation", "Installation"),
-    ("building", "Building"),
-    ("configuration", "Configuration"),
-    ("faq", "FAQ"),
-    ("credits", "Credits"),
-    ("license", "License"),
+    ("about", "About", 0),
+    ("features", "Features", 3),
+    ("commands", "Commands", 6),
+    ("catalogue", "Adding your own waters", 9),
+    ("gallery", "Gallery", 12),
+    ("dependencies", "Dependencies", 18),
+    ("incompatibilities", "Incompatibilities", 21),
+    ("installation", "Installation", 24),
+    ("building", "Building", 27),
+    ("configuration", "Configuration", 30),
+    ("faq", "FAQ", 33),
+    ("credits", "Credits", 36),
+    ("license", "License", 39),
 ]
 
 
@@ -194,8 +209,8 @@ def main() -> int:
     colours = tints()
 
     header(out / "header.png", colours)
-    for i, (sid, title) in enumerate(SECTIONS):
-        banner(out / f"{sid}.png", title, colours, offset=i * 3)
+    for sid, title, offset in SECTIONS:
+        banner(out / f"{sid}.png", title, colours, offset=offset)
     return 0
 
 
